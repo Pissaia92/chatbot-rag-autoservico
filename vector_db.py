@@ -3,6 +3,8 @@ from sentence_transformers import SentenceTransformer
 import os
 import tempfile
 
+os.environ['TOKENIZERS_PARALLELISM'] = 'false'
+
 # Usar modelo mais leve e eficiente para embeddings
 embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
@@ -15,7 +17,7 @@ def get_embeddings(texts):
         return embeddings.tolist() if hasattr(embeddings, 'tolist') else [embeddings]
 
 # Usar diretório temporário para ChromaDB
-chroma_path = os.path.join(tempfile.gettempdir(), "chroma_db")
+chroma_path = os.path.join(os.getcwd(), "chroma_data")
 client = chromadb.PersistentClient(path=chroma_path)
 
 def get_or_create_collection(name="docs"):
@@ -29,5 +31,5 @@ def add_chunks_to_collection(chunks, collection_name="docs"):
     collection.add(
     ids=ids,
     documents=chunks,
-    embeddings=embeddings
+    embeddings=embeddings # type: ignore
 )
