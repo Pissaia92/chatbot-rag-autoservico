@@ -24,11 +24,15 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
+          git remote remove space || true
           git remote add space https://Pissaia92:$HF_TOKEN@huggingface.co/spaces/Pissaia92/chatbot-rag-autosservico
+
           # Detecta branch atual no GitHub
           BRANCH="${GITHUB_REF#refs/heads/}"
           echo "Pushing $BRANCH -> main on Hugging Face"
+
           if [ "$BRANCH" = "master" ]; then
             git push --force space master:main
           else
             git push --force space main
+          fi
