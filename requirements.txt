@@ -8,13 +8,13 @@ unstructured==0.18.13
 unstructured-client==0.42.3
 
 # VECTOR DB
-chromadb==0.5.1
+chromadb
 
 # EMBEDDINGS
-sentence-transformers==2.5.1
+sentence-transformers>=2.5.1
 
 # LLM
-transformers==4.34.1
+transformers>=4.34.1
 tiktoken==0.7.0
 
 # DOCUMENT PROCESSING
@@ -25,6 +25,7 @@ python-pptx==1.0.2
 openpyxl==3.1.5
 
 # UTILS
-gradio==5.43.1
+gradio>=5.43.1
 supabase==2.18.1
 torch==2.0.1
+huggingface-hub>=0.19.3
