@@ -15,3 +15,7 @@ vector_db/
 *.pdf
 *.tmp
 temp/
+.chromadb/
+chroma_data/
+chroma_db/
+*.sqlite3
