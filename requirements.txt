@@ -1,0 +1,30 @@
+# CORE
+setuptools>=60.0.0
+wheel==0.44.0
+python-dotenv==1.1.1
+
+# UNSTRUCTURED
+unstructured==0.18.13
+unstructured-client==0.42.3
+
+# VECTOR DB
+chromadb==0.5.1
+
+# EMBEDDINGS
+sentence-transformers==2.5.1
+
+# LLM
+transformers==4.34.1
+tiktoken==0.7.0
+
+# DOCUMENT PROCESSING
+pdfminer.six==20250506
+pypdf==6.0.0
+python-docx==1.2.0
+python-pptx==1.0.2
+openpyxl==3.1.5
+
+# UTILS
+gradio==5.43.1
+supabase==2.18.1
+torch==2.0.1

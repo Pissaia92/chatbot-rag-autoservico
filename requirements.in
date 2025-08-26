@@ -1,0 +1,30 @@
+# CORE
+wheel
+setuptools
+
+# UNSTRUCTURED
+unstructured
+unstructured-client
+
+# VECTOR DB
+chromadb
+
+# EMBEDDINGS
+sentence-transformers
+
+# LLM
+transformers
+tiktoken
+huggingface_hub
+
+# DOCUMENT PROCESSING
+pdfminer.six
+pypdf
+python-docx
+python-pptx
+openpyxl
+
+# UI & UTILS
+gradio
+python-dotenv
+supabase

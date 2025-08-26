@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+env/
+venv/
+.venv/
+*.egg-info/
+.installed.cfg
+*.egg
+uploads/
+vector_db/
+*.pdf
+*.tmp
+temp/
