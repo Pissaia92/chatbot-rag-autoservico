@@ -24,22 +24,12 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          set -euo pipefail
           export GIT_TERMINAL_PROMPT=0
-          # remove old remote if exists
           git remote remove space || true
           git remote add space https://Pissaia92:$HF_TOKEN@huggingface.co/spaces/Pissaia92/chatbot-rag-autosservico
-          # detect current branch; fallback to GITHUB_REF (refs/heads/...)
-          BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)
-          if [ -z "$BRANCH" ] || [ "$BRANCH" = "HEAD" ]; then
-            BRANCH=${GITHUB_REF#refs/heads/}
-          fi
-          if [ -z "$BRANCH" ]; then
-            BRANCH="main"
-          fi
-          echo "Pushing branch '$BRANCH' to Space (target branch: main)"
+          BRANCH=$(git rev-parse --abbrev-ref HEAD)
           if [ "$BRANCH" = "master" ]; then
-            git push --force-with-lease space master:main
+            git push --force space master:main
           else
-            git push --force-with-lease space "$BRANCH":main
+            git push --force space "$BRANCH":main
           fi
