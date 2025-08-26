@@ -1,8 +1,8 @@
 ---
 title: Chatbot RAG Autosserviço
 emoji: 🤖
-colorFrom: "#ff7e5f"
-colorTo: "#feb47b"
+colorFrom: red
+colorTo: blue
 sdk: gradio
 sdk_version: "3.36"
 app_file: app.py
