@@ -3,19 +3,43 @@ name: Sync with Hugging Face Space
 on:
   push:
     branches:
-      - main 
+      - main
+      - master
 
 jobs:
   sync-to-hf:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Configure git user
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
 
       - name: Push to Hugging Face Space
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git config --global user.email "cj.nord@yahoo.com"
-          git config --global user.name "Pissaia92"
+          set -euo pipefail
+          export GIT_TERMINAL_PROMPT=0
+          # remove old remote if exists
+          git remote remove space || true
           git remote add space https://Pissaia92:$HF_TOKEN@huggingface.co/spaces/Pissaia92/chatbot-rag-autosservico
-          git push --force space main
+          # detect current branch; fallback to GITHUB_REF (refs/heads/...)
+          BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)
+          if [ -z "$BRANCH" ] || [ "$BRANCH" = "HEAD" ]; then
+            BRANCH=${GITHUB_REF#refs/heads/}
+          fi
+          if [ -z "$BRANCH" ]; then
+            BRANCH="main"
+          fi
+          echo "Pushing branch '$BRANCH' to Space (target branch: main)"
+          if [ "$BRANCH" = "master" ]; then
+            git push --force-with-lease space master:main
+          else
+            git push --force-with-lease space "$BRANCH":main
+          fi
